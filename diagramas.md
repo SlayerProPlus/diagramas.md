@@ -1,8 +1,8 @@
 ```mermaid
 graph TD
-    subgraph Sistema de Gestión Hotelera (On-Premise)
-        direction LR
+    direction LR  % Esta línea debe ir aquí, justo después de graph TD
 
+    subgraph Sistema de Gestión Hotelera (On-Premise)
         subgraph Módulo de Gestión de Reservas
             UC1[Registrar Reserva]
             UC2[Verificar Disponibilidad]
