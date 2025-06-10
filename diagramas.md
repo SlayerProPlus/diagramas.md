@@ -1,6 +1,6 @@
 ```mermaid
 graph TD
-    direction LR  % Esta línea debe ir aquí, justo después de graph TD
+    direction LR
 
     subgraph Sistema de Gestión Hotelera (On-Premise)
         subgraph Módulo de Gestión de Reservas
@@ -79,7 +79,7 @@ graph TD
     ActorRecepcionista --> UC14
     ActorRecepcionista --> UC18
 
-    % RELACIONES CORREGIDAS
+    % RELACIONES CORREGIDAS PARA UML EXTENDS/USES
     UC1 -- extends --> UC2
     UC3 -- extends --> UC2
     UC18 -- uses --> UC13
