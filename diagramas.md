@@ -79,8 +79,9 @@ graph TD
     ActorRecepcionista --> UC14
     ActorRecepcionista --> UC18
 
-    UC1 .> (Verificar Disponibilidad) : <<extends>>
-    UC3 .> (Verificar Disponibilidad) : <<extends>>
-    UC18 .> (Gestionar Información de Cliente) : <<uses>>
-    UC18 .> (Gestionar Productos/Suministros) : <<uses>>
-    UC18 .> (Actualizar Cantidad Inventario) : <<uses>>
+    % RELACIONES CORREGIDAS
+    UC1 -- extends --> UC2
+    UC3 -- extends --> UC2
+    UC18 -- uses --> UC13
+    UC18 -- uses --> UC15
+    UC18 -- uses --> UC17
