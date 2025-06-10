@@ -11,9 +11,11 @@ graph TD
     ActorRecepcionista --> UC9[Consultar Historial de Huésped]
     ActorRecepcionista --> UC10[Generar Factura de Estadía]
 
-    UC1 .> UC11(Verificar Disponibilidad) : <<includes>>
-    UC2 .> UC11 : <<includes>>
-    UC4 .> UC12(Actualizar Estado Habitación a Ocupada) : <<includes>>
-    UC5 .> UC13(Actualizar Estado Habitación a Limpieza) : <<includes>>
-    UC10 .> UC9 : <<uses>>
-    UC10 .> UC14(Registrar Pagos) : <<includes>>
+    UC1 -- includes --> UC11[Verificar Disponibilidad]
+    UC2 -- includes --> UC11
+
+    UC4 -- includes --> UC12[Actualizar Estado Habitación a Ocupada]
+    UC5 -- includes --> UC13[Actualizar Estado Habitación a Limpieza]
+
+    UC10 -- uses --> UC9
+    UC10 -- includes --> UC14[Registrar Pagos]
