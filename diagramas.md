@@ -1,21 +1,86 @@
 ```mermaid
 graph TD
-    ActorRecepcionista[Recepcionista] --> UC1[Registrar Nueva Reserva]
-    ActorRecepcionista --> UC2[Modificar Reserva Existente]
-    ActorRecepcionista --> UC3[Cancelar Reserva Existente]
-    ActorRecepcionista --> UC4[Realizar Check-in]
-    ActorRecepcionista --> UC5[Realizar Check-out]
-    ActorRecepcionista --> UC6[Asignar Habitación Manualmente]
-    ActorRecepcionista --> UC7[Consultar Estado de Habitaciones]
-    ActorRecepcionista --> UC8[Registrar Huésped Nuevo]
-    ActorRecepcionista --> UC9[Consultar Historial de Huésped]
-    ActorRecepcionista --> UC10[Generar Factura de Estadía]
+    subgraph Sistema de Gestión Hotelera (On-Premise)
+        direction LR
 
-    UC1 -- includes --> UC11[Verificar Disponibilidad]
-    UC2 -- includes --> UC11
+        subgraph Módulo de Gestión de Reservas
+            UC1[Registrar Reserva]
+            UC2[Verificar Disponibilidad]
+            UC3[Modificar Reserva]
+            UC4[Cancelar Reserva]
+        end
 
-    UC4 -- includes --> UC12[Actualizar Estado Habitación a Ocupada]
-    UC5 -- includes --> UC13[Actualizar Estado Habitación a Limpieza]
+        subgraph Módulo de Gestión de Habitaciones
+            UC5[Mostrar Estado Habitaciones]
+            UC6[Actualizar Estado Habitación]
+            UC7[Asignar Habitación Manualmente]
+        end
 
-    UC10 -- uses --> UC9
-    UC10 -- includes --> UC14[Registrar Pagos]
+        subgraph Módulo de Gestión de Empleados
+            UC8[Gestionar Empleados]
+            UC9[Asignar Rol a Empleado]
+        end
+
+        subgraph Módulo de Gestión de Reportes
+            UC10[Generar Reporte Ocupación]
+            UC11[Generar Reporte Ingresos]
+            UC12[Exportar Reporte]
+        end
+
+        subgraph Módulo de Gestión de Clientes
+            UC13[Gestionar Información de Cliente]
+            UC14[Consultar Historial de Estadías]
+        end
+
+        subgraph Módulo de Gestión de Inventario
+            UC15[Gestionar Productos/Suministros]
+            UC16[Mostrar Stock Disponible]
+            UC17[Actualizar Cantidad Inventario]
+        end
+
+        subgraph Módulo de Facturación
+            UC18[Generar Factura]
+        end
+
+        subgraph Módulo de Configuración (Implícito)
+            UC19[Configurar Parámetros Hotel]
+        end
+
+    end
+
+    ActorAdmin[Administrador] --> UC19
+    ActorAdmin --> UC8
+    ActorAdmin --> UC9
+    ActorAdmin --> UC10
+    ActorAdmin --> UC11
+    ActorAdmin --> UC12
+    ActorAdmin --> UC15
+    ActorAdmin --> UC16
+    ActorAdmin --> UC17
+    ActorAdmin --> UC13
+    ActorAdmin --> UC14
+    ActorAdmin --> UC1
+    ActorAdmin --> UC2
+    ActorAdmin --> UC3
+    ActorAdmin --> UC4
+    ActorAdmin --> UC5
+    ActorAdmin --> UC6
+    ActorAdmin --> UC7
+    ActorAdmin --> UC18
+
+    ActorRecepcionista[Recepcionista] --> UC1
+    ActorRecepcionista --> UC2
+    ActorRecepcionista --> UC3
+    ActorRecepcionista --> UC4
+    ActorRecepcionista --> UC5
+    ActorRecepcionista --> UC6
+    ActorRecepcionista --> UC7
+    ActorRecepcionista --> UC13
+    ActorRecepcionista --> UC14
+    ActorRecepcionista --> UC18
+
+    UC1 .> (Verificar Disponibilidad) : <<extends>>
+    UC3 .> (Verificar Disponibilidad) : <<extends>>
+    UC18 .> (Gestionar Información de Cliente) : <<uses>>
+    UC18 .> (Gestionar Productos/Suministros) : <<uses>>
+    UC18 .> (Actualizar Cantidad Inventario) : <<uses>>
